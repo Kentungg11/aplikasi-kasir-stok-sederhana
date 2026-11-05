@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Aplikasi Kasir & Stok</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0a9a57;
+            color: #fff;
+        }
+
+        .navbar {
+            background-color: rgb(1, 69, 49);
+            color: #fff;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar .user-info {
+            font-size: 1rem;
+        }
+
+        .btn-logout {
+            background-color: #0a9a57;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-left: 1rem;
+            justify-content: bottom;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: rgb(1, 69, 49);
+            color: #fff;
+            padding-top: 2rem;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .sidebar ul li {
+            padding: 1rem;
+        }
+
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .sidebar ul li a.active {
+            background-color: #177d37;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 2rem;
+        }
+
+        .card {
+            background-color: #0a483a;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-group {
+            flex-grow: 1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+    /* Tampilan responsif untuk layar HP */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding-top: 0;
+    }
+
+    .sidebar ul {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .card {
+        overflow-x: auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">Cashere</div>
+        <div class="user-info">
+            <span id="dateTime"></span> | 
+            <span>Halo, <strong>Admin Kasir</strong></span>
+            <a href="index.html" class="btn-logout">Logout</a>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <aside class="sidebar">
+            <ul>
+                <li><a href="#" class="active">Kelola Produk & Stok</a></li>
+                <li><a href="#">Transaksi Penjualan</a></li>
+                <li><a href="#">Laporan</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Kelola Menu / Produk</h1>
+
+            <section class="card">
+                <h3>Tambah Produk Baru</h3>
+                <form id="formProduk" onsubmit="return handleTambahProduk(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="namaProduk">Nama Produk</label>
+                            <input type="text" id="namaProduk" placeholder="Nama produk/menu..." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="kategori">Kategori</label>
+                            <select id="kategori" required>
+                                <option value="">-- Pilih Kategori --</option>
+                                <option value="makanan">Makanan</option>
+                                <option value="minuman">Minuman</option>
+                                <option value="snack">Snack</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="harga">Harga (Rp)</label>
+                            <input type="number" id="harga" placeholder="0" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="stok">Jumlah Stok</label>
+                            <input type="number" id="stok" placeholder="0" min="0" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary">Simpan Produk</button>
+                </form>
+            </section>
+
+            <section class="card">
+                <h3>Daftar Produk & Stok</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Produk</th>
+                            <th>Kategori</th>
+                            <th>Harga</th>
+                            <th>Stok</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelProdukBody">
+                        <!-- Data dikosongkan (Bisa diisi secara dinamis nantinya) -->
+                        <tr>
+                            <td colspan="6" style="text-align: center; color: #888;">Belum ada data produk. Silakan tambah data di atas.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="jscript.js"></script>
+</body>
+</html>
