@@ -48,6 +48,8 @@ Projek Kasir & Stok Sederhana/
 ├── README.md
 ├── AI-Usage-Log-Milestone1.md
 └── AI-Usage-Log-Milestone2.md
+└── wireframe/
+    └── wireframe.pptx
 ```
 
 ## Status Proyek
