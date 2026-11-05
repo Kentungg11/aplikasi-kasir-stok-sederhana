@@ -100,7 +100,7 @@
             display: block;
             margin-bottom: 0.5rem;
         }
-    /* Tampilan responsif untuk layar HP */
+
 @media screen and (max-width: 768px) {
     .navbar {
         flex-wrap: wrap;
@@ -131,6 +131,27 @@
 
     .card {
         overflow-x: auto;
+    }
+        /* Rapikan navbar pada tampilan HP */
+    .navbar {
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .user-info {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+    }
+
+    #dateTime {
+        width: 100%;
+    }
+
+    .btn-logout {
+        margin-left: auto;
+        ;
     }
 }
 </style>
